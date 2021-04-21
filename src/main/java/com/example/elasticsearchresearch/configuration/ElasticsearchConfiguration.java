@@ -30,8 +30,7 @@ public class ElasticsearchConfiguration {
       .setNameFormat("elasticSearchExecutor-%d")
       .setDaemon(false)
       .build();
-    ExecutorService executorService = Executors.newFixedThreadPool(10, threadFactory);
 
-    return executorService;
+    return Executors.newFixedThreadPool(10, threadFactory);
   }
 }

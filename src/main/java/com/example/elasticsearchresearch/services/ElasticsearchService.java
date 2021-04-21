@@ -41,13 +41,9 @@ public abstract class ElasticsearchService<T> {
 
 
   protected Function<Optional<String>, QueryBuilder> constructSearchQuery() {
-    return (textEntry) -> {
-      QueryBuilder queryBuilder = textEntry
-        .map(value -> (QueryBuilder) QueryBuilders.wildcardQuery(TEXT_ENTRY, value + "*"))
-        .orElseGet(() -> QueryBuilders.matchAllQuery());
-
-      return queryBuilder;
-    };
+    return (textEntry) -> textEntry
+      .map(value -> (QueryBuilder) QueryBuilders.wildcardQuery(TEXT_ENTRY, value + "*"))
+      .orElseGet(QueryBuilders::matchAllQuery);
   }
 
   protected Function<QueryBuilder, SearchSourceBuilder> createSearchSourceBuilder() {

@@ -22,16 +22,14 @@ public class SearchQueryService extends ElasticsearchService<List<ShakespeareHit
 
   @Override
   protected Function<CompletableFuture<SearchResponse>, CompletableFuture<List<ShakespeareHit>>> mapSearchResponse() {
-    return (responseFuture) -> responseFuture.thenApply((response) -> {
-      return Arrays
-        .stream(
-          response
-            .getHits()
-            .getHits()
-        )
-        .map(hit -> convertHit(hit.getSourceAsMap()))
-        .collect(Collectors.toList());
-    });
+    return (responseFuture) -> responseFuture.thenApply((response) -> Arrays
+      .stream(
+        response
+          .getHits()
+          .getHits()
+      )
+      .map(hit -> convertHit(hit.getSourceAsMap()))
+      .collect(Collectors.toList()));
   }
 
   private ShakespeareHit convertHit(Map<String, Object> sourceAsMap) {

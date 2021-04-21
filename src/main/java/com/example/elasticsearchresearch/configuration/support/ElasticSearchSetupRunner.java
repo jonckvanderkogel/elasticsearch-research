@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
+import org.elasticsearch.action.bulk.BulkItemResponse;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.index.IndexRequest;
@@ -104,7 +105,7 @@ public class ElasticSearchSetupRunner {
 
   private void logBulkErrors(BulkResponse bulkResponse) {
     StreamSupport.stream(bulkResponse.spliterator(), false)
-      .filter(item -> item.isFailed())
+      .filter(BulkItemResponse::isFailed)
       .forEach(item -> log.error("Error {}", item.getFailure().toString()));
   }
 }
