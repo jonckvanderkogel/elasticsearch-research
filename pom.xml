@@ -24,7 +24,7 @@
 		<java.version>1.8</java.version>
 		<java.source.version>1.8</java.source.version>
 		<java.target.version>1.8</java.target.version>
-		<elasticsearch.version>6.8.15</elasticsearch.version>
+		<elasticsearch.version>6.8.17</elasticsearch.version>
 		<guava.version>30.1.1-jre</guava.version>
 	</properties>
 
